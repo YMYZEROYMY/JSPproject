@@ -62,7 +62,7 @@ window.location.href = "../login_logout/login.jsp"</script>
             <td><b>修改</b></td>
         </tr>
 
-        <tr style="height: 30px">
+        <tr style="height: 30px" class="bg">
             <td><%=Mno%>
             </td>
             <td><%=user.getMname()%>
@@ -100,8 +100,9 @@ window.location.href = "../login_logout/login.jsp"</script>
                 Rent rent = (Rent) rentList.get(i);
                 Rsum += rent.getCost();
         %>
-        <tr style="height: 30px">
-            <td><%=rent.getSno()%>
+        <tr style="height: 30px" class="bg">
+            <td><a href="./view_rent_shop.jsp?i=<%=i%>"><%=rent.getSno()%>
+            </a>
             </td>
             <td><%=rent.getRname()%>
             </td>
@@ -122,6 +123,15 @@ window.location.href = "../login_logout/login.jsp"</script>
 </details>
 <details>
     <summary class="bg"><h3>可租用店铺</h3></summary>
+    <form action="./find.jsp" method="post">
+    <table align="center" width="80%">
+            <tr>
+                <td align="left">价格:<input name="minPrice" value="<%=auser.getMinPrice()%>" type="text">··<input name="maxPrice" value="<%=auser.getMaxPrice()%>" type="text">
+                    <input type="submit" value="确定">
+                </td>
+            </tr>
+    </table>
+    </form>
     <table width="80%" align="center" border="5">
         <tr style="height: 40px">
             <td><b>编号</b></td>
@@ -131,11 +141,11 @@ window.location.href = "../login_logout/login.jsp"</script>
             <td><b>租用</b></td>
         </tr>
         <%
-            ArrayList unRentList = auser.getUnRentList();//获取可被租用的商铺列表
+            ArrayList unRentList = auser.getSelfUnRentList();//获取可被租用的商铺列表
             for (int i = 0; i < unRentList.size(); i++) {
                 Shop shop = (Shop) unRentList.get(i);
         %>
-        <tr style="height: 30px">
+        <tr style="height: 30px" class="bg">
             <td><%=shop.getSno()%>
             </td>
             <td><%=shop.getAddr()%>

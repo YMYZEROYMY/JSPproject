@@ -28,7 +28,7 @@
     user.setMno(oldUser.getMno());
     admin.setUser(user);
     if (admin.alterPerson()) {
-        admin.setUserList();//修改成功后刷新用户列表
+        admin.setSelfUserList();//修改成功后刷新用户列表
 %>
 <script>alert("修改成功！");
 window.location.href = "../admin.jsp"</script>

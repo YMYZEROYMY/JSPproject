@@ -25,7 +25,7 @@
     shop.setState(request.getParameter("state"));
     admin.setShop(shop);
     if (admin.alterShop()) {
-        admin.setShopList();//修改成功后刷新店铺列表
+        admin.setSelfShopList();//修改成功后刷新店铺列表
 %>
 <script>alert("修改成功！");
 window.location.href = "../admin.jsp"</script>

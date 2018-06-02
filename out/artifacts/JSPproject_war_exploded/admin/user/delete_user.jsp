@@ -18,7 +18,7 @@
 <body>
 <%
     if (admin.deletePerson(Integer.parseInt(request.getParameter("i")))) {
-        admin.setUserList();//删除成功后刷新用户列表
+        admin.setSelfUserList();//删除成功后刷新用户列表
 %>
 <script>alert("删除成功！");
 window.location.href = "../admin.jsp"</script>

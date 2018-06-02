@@ -19,8 +19,8 @@
     <meta charset="UTF-8">
     <style type="text/css">
         .bg:hover {
-        /*/ / 半透明背景*/
-        background-color: rgba(205, 192, 176, 0.5);
+            /*/ / 半透明背景*/
+            background-color: rgba(205, 192, 176, 0.5);
         }
     </style>
 </head>
@@ -37,15 +37,32 @@
 window.location.href = "../login_logout/login.jsp"</script>
 <%
 } else {//正文开始！！！
-    Date date = new Date();
 %>
+<%--显示动态时间--%>
+<p id="time1" style="color: black;"></p>
+<script>
+    function mytime(){
+        var a = new Date();
+        var b = a.toLocaleTimeString();
+        var c = a.toLocaleDateString();
+        document.getElementById("time1").innerHTML = c+"&nbsp"+b;
+    }
+    setInterval(function() {mytime()},1000);
+</script>
+
 <tr>
-    <td><b><%=date%>
-    </b></td>
     <td align="right"><a href="../login_logout/logout.jsp">退出</a></td>
 </tr>
 <details>
     <summary class="bg"><h3>商户表</h3></summary>
+    <form action="find/find_user.jsp" method="post">
+        <table align="center" width="80%">
+            <tr>
+                <td>编号或姓名：<input name="findUser" type="text" value="<%=admin.getFindUser()%>">
+                    <input value="搜索" type="submit"></td>
+            </tr>
+        </table>
+    </form>
     <table width="80%" align="center" border="5">
         <tr style="height: 40px">
             <td><b>编号</b></td>
@@ -59,11 +76,11 @@ window.location.href = "../login_logout/login.jsp"</script>
             <td><b>删除</b></td>
         </tr>
         <%
-            ArrayList userList = admin.getUserList();//获取用户列表
+            ArrayList userList = admin.getSelfUserList();//获取用户列表
             for (int i = 0; i < userList.size(); i++) {
                 User user = (User) userList.get(i);
         %>
-        <tr style="height: 30px">
+        <tr style="height: 30px" class="bg">
             <td><%=user.getMno()%>
             </td>
             <td><%=user.getMname()%>
@@ -88,8 +105,16 @@ window.location.href = "../login_logout/login.jsp"</script>
 </details>
 <details>
     <summary class="bg"><h3>商铺表</h3></summary>
+    <form action="find/find_shop.jsp">
+        <table width="80%" align="center">
+            <tr>
+                <td>输入编号：<input name="findShop" type="text" value="<%=admin.getFindShop()%>">
+                    <input type="submit" value="搜索"></td>
+                <td align="right"><a href="shop/input_add_shop.jsp">添加商铺</a></td>
+            </tr>
+        </table>
+    </form>
     <table width="80%" border="5" align="center">
-        <tr><a href="shop/input_add_shop.jsp">添加商铺</a></tr>
         <tr style="height: 40px">
             <td><b>编号</b></td>
             <td><b>地址</b></td>
@@ -100,13 +125,13 @@ window.location.href = "../login_logout/login.jsp"</script>
             <td><b>删除</b></td>
         </tr>
         <%
-            ArrayList shopList = admin.getShopList();//获取商铺列表
+            ArrayList shopList = admin.getSelfShopList();//获取商铺列表
             int Ssum = 0;//商铺总租费
             for (int i = 0; i < shopList.size(); i++) {
                 Shop shop = (Shop) shopList.get(i);
                 Ssum += shop.getCost();
         %>
-        <tr style="height: 30px">
+        <tr style="height: 30px" class="bg">
             <td><%=shop.getSno()%>
             </td>
             <td><%=shop.getAddr()%>
@@ -133,6 +158,14 @@ window.location.href = "../login_logout/login.jsp"</script>
 </details>
 <details>
     <summary class="bg"><h3>租用表</h3></summary>
+    <form action="find/find_rent.jsp">
+        <table align="center" width="80%">
+            <tr>
+                <td>商铺编号或商户编号：<input name="findRent" value="<%=admin.getFindRent()%>" type="text">
+                    <input type="submit" value="搜索"></td>
+            </tr>
+        </table>
+    </form>
     <table width="80%" border="5" align="center">
         <tr style="height: 40px">
             <td><b>商铺编号</b></td>
@@ -142,14 +175,14 @@ window.location.href = "../login_logout/login.jsp"</script>
             <td><b>取消出租</b></td>
         </tr>
         <%
-            ArrayList rentList = admin.getRentList();//获取租用信息表
+            ArrayList rentList = admin.getSelfRentList();//获取租用信息表
             int Rsum = 0;//租金总额
             for (int i = 0; i < rentList.size(); i++) {
                 Rent rent = (Rent) rentList.get(i);
                 Rsum += rent.getCost();
         %>
-        <tr style="height: 30px">
-            <td><%=rent.getSno()%>
+        <tr style="height: 30px" class="bg">
+            <td><a href="./detail_rent.jsp?i=<%=i%>"><%=rent.getSno()%></a>
             </td>
             <td><%=rent.getMno()%>
             </td>

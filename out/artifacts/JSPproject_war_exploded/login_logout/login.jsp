@@ -50,10 +50,13 @@
 <br>
 <br>
 <br>
-<h1><b>欢迎来到YMY商城</b></h1>
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
+<table align="center"><tr align="center"><td><h1><b>欢迎来到YMY自选店铺商城</b></h1></td></tr></table>
 <br>
 <br>
 <br>
@@ -64,17 +67,17 @@
         <tr style="height: 50px" align="center">
             <td><b>编号：</b><input type="text" name="Mno" title="忘了找管理员"
                                  value="<jsp:getProperty name="checkuser" property="mno"/>" required="required">
-                <span style="color: red"><%=checkuser.getError("Mno")%></span>
-                <%--//获取登录失败信息--%>
             </td>
         </tr>
+        <tr><td><%=checkuser.getError("Mno")%></td></tr>
+        <%--//获取登录失败信息--%>
         <tr style="height: 50px" align="center">
             <td><b>密码：</b><input type="password" name="passwd" title="忘了找管理员" required="required"
                                  value="<jsp:getProperty name="checkuser" property="passwd"/>">
-                <span style="color: red"><%=checkuser.getError("passwd")%></span>
-                <%--//获取登录失败信息--%>
             </td>
         </tr>
+        <tr><td><%=checkuser.getError("passwd")%></td></tr>
+        <%--//获取登录失败信息--%>
 
         <tr align="center">
             <td>

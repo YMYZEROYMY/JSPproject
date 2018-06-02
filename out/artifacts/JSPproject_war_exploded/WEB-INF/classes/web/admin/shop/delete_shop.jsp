@@ -18,7 +18,7 @@
 <body>
 <%
     if (admin.deleteShop(Integer.parseInt(request.getParameter("i")))) {
-        admin.setShopList();//删除成功后刷新店铺列表
+        admin.setSelfShopList();//删除成功后刷新店铺列表
 %>
 <script>alert("删除成功！");
 window.location.href = "../admin.jsp"</script>

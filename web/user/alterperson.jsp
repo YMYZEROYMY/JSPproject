@@ -24,7 +24,7 @@
             <td>编号</td>
             <td>
                 <input name="Mno" value="<%=user.getMno()%>" required="required" title="不可重复" type="text">
-                <spen style="color: red"><%=auser.getError("checkMno")%>
+                <spen style="color: red"><%=auser.getError("checkMno")%>*
                 </spen>
             </td>
         </tr>

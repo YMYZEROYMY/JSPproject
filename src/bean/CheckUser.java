@@ -33,11 +33,10 @@ public class CheckUser implements Serializable {
     public boolean check() {//登录检测
         boolean flag = true;
         if (!this.userMap.containsKey(this.mno)) {//判断用户是否存在
-            flag = false;
             errorMap.put("Mno", "该用户不存在！");
             this.mno = "";
             this.passwd = "";
-            return flag;
+            return false;
         }
         String passwd = this.userMap.get(this.mno);
         if (passwd == null || !passwd.equals(this.passwd)) {//判断密码是否正确

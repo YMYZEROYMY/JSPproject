@@ -25,7 +25,7 @@
     shop.setState(request.getParameter("state"));
     admin.setShop(shop);
     if (admin.addShop()) {
-        admin.setShopList();//添加成功后刷新店铺列表
+        admin.setSelfShopList();//添加成功后刷新店铺列表
 %>
 <script>alert("添加成功！");
 window.location.href = "../admin.jsp"</script>

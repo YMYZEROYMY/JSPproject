@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 
-//根界面！！！判断当前session该跳转的界面
+<%--//根界面！！！判断当前session该跳转的界面--%>
 
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>

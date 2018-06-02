@@ -15,7 +15,7 @@
     <title>修改用户</title>
     <meta charset="UTF-8">
 </head>
-<body style="background: url(/img/修改.jpg) no-repeat;background-size: cover">
+<body style="background: url(../img/修改.jpg) no-repeat;background-size: cover">
 <%
     User user = admin.getSubUserList(Integer.parseInt(request.getParameter("i")));//获取用户修改前信息
 %>

@@ -15,7 +15,7 @@
     <title>修改店铺</title>
     <meta charset="UTF-8">
 </head>
-<body style="background: url(/img/修改.jpg) no-repeat;background-size: cover">
+<body style="background: url(../img/修改.jpg) no-repeat;background-size: cover">
 <%
     //获取界面显示的店铺信息原始值有两种方法：修改前的数据以及修改失败后显示修改失败的信息。此处用第一种
     Shop shop = admin.getSubShopList(Integer.parseInt(request.getParameter("i")));

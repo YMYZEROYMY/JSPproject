@@ -18,7 +18,7 @@
 <body>
 <%
     if (admin.deleteRent(Integer.parseInt(request.getParameter("i")))) {
-        admin.setRentList();//取消成功后刷新租用表
+        admin.setSelfRentList();//取消成功后刷新租用表
 %>
 <script>alert("取消成功！");
 window.location.href = "./admin.jsp"</script>

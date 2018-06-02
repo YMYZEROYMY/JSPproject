@@ -13,22 +13,35 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Admin implements Serializable {
+    private String findUser;
+    private String findRent;
+    private String findShop;
     private User user;
     private Shop shop;
     private ArrayList userList;
     private ArrayList rentList;
     private ArrayList shopList;
+    private ArrayList selfUserList;
+    private ArrayList selfRentList;
+    private ArrayList selfShopList;
+
 
     public Admin() {//构造函数
         super();
+        this.findRent="";
+        this.findShop="";
+        this.findUser="";
         this.user = new User();
         this.shop = new Shop();
         userList = new ArrayList();
         rentList = new ArrayList();
         shopList = new ArrayList();
-        userList = AdminOperator.getUserList();
-        rentList = AdminOperator.getRentList();
-        shopList = AdminOperator.getShopList();
+        selfRentList=new ArrayList();
+        selfShopList=new ArrayList();
+        selfUserList=new ArrayList();
+        setSelfRentList();
+        setSelfShopList();
+        setSelfUserList();
     }
 
     public boolean alterPerson() {
@@ -60,15 +73,15 @@ public class Admin implements Serializable {
 
     //获取单个List
     public User getSubUserList(int i) {
-        return (User) userList.get(i);
+        return (User) selfUserList.get(i);
     }
 
     public Shop getSubShopList(int i) {
-        return (Shop) shopList.get(i);
+        return (Shop) selfShopList.get(i);
     }
 
     public Rent getSubRentList(int i) {
-        return (Rent) rentList.get(i);
+        return (Rent) selfRentList.get(i);
     }
 
     public ArrayList getRentList() {
@@ -109,5 +122,123 @@ public class Admin implements Serializable {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    //查找
+
+    public String getFindUser() {
+        return findUser;
+    }
+
+    public void setFindUser(String findUser) {
+        if(findUser==null){
+            this.findUser="";
+        }else{
+            this.findUser = findUser ;
+        }
+    }
+
+    public String getFindRent() {
+        return findRent;
+    }
+
+    public void setFindRent(String findRent) {
+        if(findRent==null){
+            this.findRent="";
+        }else{
+            this.findRent = findRent;
+        }
+    }
+
+    public String getFindShop() {
+        return findShop;
+    }
+
+    public void setFindShop(String findShop) {
+        if(findShop==null){
+            this.findShop="";
+        }else{
+            this.findShop = findShop;
+        }
+    }
+
+    //查找
+
+    public ArrayList getSelfUserList() {
+        return selfUserList;
+    }
+
+    public void setSelfUserList() {
+        selfUserList.clear();
+        userList=AdminOperator.getUserList();
+        if(findUser==null||"".equals(findUser)){
+            selfUserList=getUserList();
+        }else{
+            for(int i=0;i<userList.size();i++){
+                 User user= (User) userList.get(i);
+                if(user.getMno().contains(findUser)||user.getMname().contains(findUser)){
+                    selfUserList.add(user);
+                }
+            }
+        }
+    }
+
+    public ArrayList getSelfRentList() {
+        return selfRentList;
+    }
+
+    public void setSelfRentList() {
+        selfRentList.clear();
+        rentList=AdminOperator.getRentList();
+        if(findRent==null||"".equals(findRent)){
+            selfRentList=getRentList();
+        }else{
+            for(int i=0;i<rentList.size();i++){
+                Rent rent=(Rent)rentList.get(i);
+                if(rent.getSno().contains(this.findRent)||rent.getMno().contains(this.findRent)){
+                    selfRentList.add(rent);
+                }
+            }
+        }
+    }
+
+    public ArrayList getSelfShopList() {
+        return selfShopList;
+    }
+
+    public void setSelfShopList() {
+        selfShopList.clear();
+        shopList=AdminOperator.getShopList();
+        if(findShop==null||"".equals(findShop)){
+            selfShopList=shopList;
+        }else{
+            for(int i=0;i<shopList.size();i++){
+                Shop shop=(Shop)shopList.get(i);
+                if(shop.getSno().contains(this.findShop)){
+                    selfShopList.add(shop);
+                }
+            }
+        }
+    }
+
+    //获取租用详情
+    public Shop getDetailRentShop(String sno){
+        Shop shop=new Shop();
+        for(int i=0;i<shopList.size();i++){
+            if(sno.equals(((Shop)shopList.get(i)).getSno())){
+                return (Shop)shopList.get(i);
+            }
+        }
+        return shop;
+    }
+
+    public User getDetailRentUser(String mno){
+        User user=new User();
+        for(int i=0;i<userList.size();i++){
+            if(mno.equals(((User)userList.get(i)).getMno())){
+                return (User)userList.get(i);
+            }
+        }
+        return user;
     }
 }
