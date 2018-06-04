@@ -31,12 +31,12 @@ public class AUser implements Serializable {
         super();
         this.mno = "";
         this.user = new User();
-        minPrice=0;
-        maxPrice=100000;
-        shopList=new ArrayList();
+        minPrice = 0;
+        maxPrice = 100000;
+        shopList = new ArrayList();
         rentList = new ArrayList();
         unRentList = new ArrayList();
-        selfUnRentList=new ArrayList();
+        selfUnRentList = new ArrayList();
         userMap = new HashMap<>();
         errorMap = new HashMap<>();
     }
@@ -44,7 +44,10 @@ public class AUser implements Serializable {
     //租用店铺
     public boolean addRent(int i, String Rname) {
         Shop shop = getSubShop(i);
-        return UserOperator.addRentShops(this.mno, shop.getSno(), Rname);
+        if (UserOperator.addRentShops(this.mno, shop.getSno(), Rname)) {//判断租用是否成功
+            return UserOperator.addRentMoney(this.mno, this.user.getMoney() - shop.getCost());//租用成功立即扣除租金
+        }
+        return false;
     }
 
     //取消店铺租用
@@ -151,12 +154,12 @@ public class AUser implements Serializable {
     }
 
     //获取店铺详细信息
-    public Shop getDetailShop(int i){
-        Shop shop=new Shop();
-        Rent rent=getSubRent(i);
-        for(int j=0;j<shopList.size();j++){
-            Shop subShop= (Shop) shopList.get(j);
-            if(subShop.getSno().equals(rent.getSno())){
+    public Shop getDetailShop(int i) {
+        Shop shop = new Shop();
+        Rent rent = getSubRent(i);
+        for (int j = 0; j < shopList.size(); j++) {
+            Shop subShop = (Shop) shopList.get(j);
+            if (subShop.getSno().equals(rent.getSno())) {
                 return subShop;
             }
         }

@@ -187,6 +187,25 @@ public class UserOperator {
         return re > 0;
     }
 
+    public static boolean addRentMoney(String Mno, int money) {//扣除租金
+        Connection conn = null;
+        PreparedStatement pst = null;
+        int re = 0;
+        try {
+            conn = DBOperator.getconnection();
+            String sql = "update Men set money=? where Mno=?";
+            pst = conn.prepareStatement(sql);
+            pst.setInt(1, money);
+            pst.setString(2, Mno);
+            re = pst.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBOperator.close(pst, conn);
+        }
+        return re > 0;
+    }
+
     //改店名
     public static boolean alterRname(String Sno, String Rname) {
         Connection conn = null;

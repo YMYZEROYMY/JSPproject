@@ -1,10 +1,10 @@
 <%--//管理员界面--%>
 
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="base.User" %>
-<%@ page import="base.Shop" %>
 <%@ page import="base.Rent" %>
-<%@ page import="java.util.Date" %><%--
+<%@ page import="base.Shop" %>
+<%@ page import="base.User" %>
+<%@ page import="java.util.ArrayList" %>
+<%--
   Created by IntelliJ IDEA.
   User: Administrator
   Date: 2018/5/25
@@ -41,13 +41,16 @@ window.location.href = "../login_logout/login.jsp"</script>
 <%--显示动态时间--%>
 <p id="time1" style="color: black;"></p>
 <script>
-    function mytime(){
+    function mytime() {
         var a = new Date();
         var b = a.toLocaleTimeString();
         var c = a.toLocaleDateString();
-        document.getElementById("time1").innerHTML = c+"&nbsp"+b;
+        document.getElementById("time1").innerHTML = c + "&nbsp" + b;
     }
-    setInterval(function() {mytime()},1000);
+
+    setInterval(function () {
+        mytime()
+    }, 1000);
 </script>
 
 <tr>
@@ -182,7 +185,8 @@ window.location.href = "../login_logout/login.jsp"</script>
                 Rsum += rent.getCost();
         %>
         <tr style="height: 30px" class="bg">
-            <td><a href="./detail_rent.jsp?i=<%=i%>"><%=rent.getSno()%></a>
+            <td><a href="./detail_rent.jsp?i=<%=i%>"><%=rent.getSno()%>
+            </a>
             </td>
             <td><%=rent.getMno()%>
             </td>
