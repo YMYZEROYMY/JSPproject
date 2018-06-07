@@ -20,7 +20,8 @@
     response.setCharacterEncoding("UTF-8");
     Shop shop = auser.getSubShop(Integer.parseInt(request.getParameter("i")));//获取将要租用的店铺信息
     if ((auser.getUser()).getMoney() < shop.getCost()) {%>//先判断用户余额是否充足
-<script>alert("余额不足，请先充值！管理员电话：138888888888");window.location.href="./sub.jsp"</script>
+<script>alert("余额不足，请先充值！管理员电话：138888888888");
+window.location.href = "./sub.jsp"</script>
 <%
 } else {
 %>
@@ -40,7 +41,9 @@
             <td>店名:<input name="Rname" type="text" title="取个店名吧" required="required">
                 <input type="submit" value="确定" onclick="return confirm('确定租用吗？')"></td>
         </tr>
-        <tr><td>*租用立即扣除第一个月租金！</td></tr>
+        <tr>
+            <td>*租用立即扣除第一个月租金！</td>
+        </tr>
     </table>
 </form>
 <%}%>
